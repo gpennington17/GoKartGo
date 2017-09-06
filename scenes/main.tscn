@@ -2,6 +2,6 @@
 
 [node name="main" type="Node2D"]
 
-[node name="background" type="Node2D" parent="."]
+[node name="test" type="Node2D" parent="."]
 
 
