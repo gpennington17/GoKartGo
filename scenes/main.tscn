@@ -6,5 +6,6 @@
 
 [node name="test" type="Node2D" parent="."]
 
+[node name="Player" parent="." instance=ExtResource( 1 )]
 
 
