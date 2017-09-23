@@ -1,7 +1,0 @@
-[gd_scene format=1]
-
-[node name="main" type="Node2D"]
-
-[node name="background" type="Node2D" parent="."]
-
-
