@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=45 format=1]
-=======
 [gd_scene load_steps=44 format=1]
->>>>>>> MainScene
 
 [ext_resource path="res://Scenes/TrackMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/car.tscn" type="PackedScene" id=2]
@@ -155,29 +151,17 @@ points = Vector2Array( -7231.57, 1796.78, -7263.57, 1852.78, -7263.57, 1020.78, 
 [sub_resource type="ConvexPolygonShape2D" id=30]
 
 custom_solver_bias = 0.0
-<<<<<<< HEAD
-points = Vector2Array( -8869.84, -585.723, -1927.84, -585.723, -1943.84, -513.723, -4879.57, -525.971 )
-=======
 points = Vector2Array( -7231.57, 1060.78, -7263.57, 1020.78, -7003.28, 897.166, -6947.28, 933.166 )
->>>>>>> MainScene
 
 [sub_resource type="ConvexPolygonShape2D" id=31]
 
 custom_solver_bias = 0.0
-<<<<<<< HEAD
-points = Vector2Array( -7111.57, 940.785, -7231.57, 1060.78, -7263.57, 1020.78, -7175.57, 924.785 )
-=======
 points = Vector2Array( -6947.28, -541.495, -6947.28, 933.166, -7003.28, 897.166, -7007.28, -533.495 )
->>>>>>> MainScene
 
 [sub_resource type="ConvexPolygonShape2D" id=32]
 
 custom_solver_bias = 0.0
-<<<<<<< HEAD
-points = Vector2Array( -7111.57, -525.971, -7111.57, 940.785, -7175.57, 924.785, -7175.57, -514.756 )
-=======
 points = Vector2Array( -6947.28, -541.495, -8869.84, -585.723, -1927.84, -585.723, -1943.84, -513.723, -4879.57, -525.971 )
->>>>>>> MainScene
 
 [sub_resource type="ConvexPolygonShape2D" id=33]
 
@@ -202,47 +186,24 @@ points = Vector2Array( -9127.57, 3450.83, -9184.43, 3530.83, -9192.43, -556.249,
 [sub_resource type="ConvexPolygonShape2D" id=37]
 
 custom_solver_bias = 0.0
-<<<<<<< HEAD
-points = Vector2Array( -7175.57, -514.756, -9135.57, -514.756, -9192.43, -556.249, -8869.84, -585.723, -7111.57, -525.971 )
-=======
 points = Vector2Array( -7007.28, -533.495, -9135.57, -514.756, -9192.43, -556.249, -8869.84, -585.723, -6947.28, -541.495 )
->>>>>>> MainScene
 
 [sub_resource type="ConvexPolygonShape2D" id=38]
 
 custom_solver_bias = 0.0
-<<<<<<< HEAD
-points = Vector2Array( -4879.57, -525.971, -7111.57, -525.971, -8869.84, -585.723 )
-
-[sub_resource type="ConvexPolygonShape2D" id=39]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -4879.57, -525.971, -1943.84, -513.723, -4423.84, -513.723 )
-
-[sub_resource type="ConvexPolygonShape2D" id=40]
-=======
 points = Vector2Array( -4879.57, -525.971, -1943.84, -513.723, -4423.84, -513.723 )
 
 [sub_resource type="ConvexPolygonShape2D" id=39]
->>>>>>> MainScene
 
 custom_solver_bias = 0.0
 points = Vector2Array( 1025.71, -667.751, 1033.71, -507.751, -78.2866, -507.751, -102.287, -531.751 )
 
-<<<<<<< HEAD
-[sub_resource type="ConvexPolygonShape2D" id=41]
-=======
 [sub_resource type="ConvexPolygonShape2D" id=40]
->>>>>>> MainScene
 
 custom_solver_bias = 0.0
 points = Vector2Array( -1710.29, -27.7513, -1910.29, -27.7513, -1910.29, -699.751, -1686.29, -555.751 )
 
-<<<<<<< HEAD
-[sub_resource type="ConvexPolygonShape2D" id=42]
-=======
 [sub_resource type="ConvexPolygonShape2D" id=41]
->>>>>>> MainScene
 
 custom_solver_bias = 0.0
 points = Vector2Array( -1686.29, -555.751, -1910.29, -699.751, 1025.71, -667.751, -102.287, -531.751 )
@@ -374,11 +335,7 @@ shapes/37/shape = SubResource( 38 )
 shapes/37/transform = Matrix32( 1, 0, 0, 1, 0, 20.9974 )
 shapes/37/trigger = false
 shapes/38/shape = SubResource( 39 )
-<<<<<<< HEAD
-shapes/38/transform = Matrix32( 1, 0, 0, 1, 0, 20.9974 )
-=======
 shapes/38/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
->>>>>>> MainScene
 shapes/38/trigger = false
 shapes/39/shape = SubResource( 40 )
 shapes/39/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -386,12 +343,6 @@ shapes/39/trigger = false
 shapes/40/shape = SubResource( 41 )
 shapes/40/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/40/trigger = false
-<<<<<<< HEAD
-shapes/41/shape = SubResource( 42 )
-shapes/41/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/41/trigger = false
-=======
->>>>>>> MainScene
 collision/layers = 1
 collision/mask = 1
 constant_linear_velocity = Vector2( 0, 0 )
@@ -418,24 +369,15 @@ trigger = false
 
 transform/pos = Vector2( 0, 20.9974 )
 build_mode = 0
-<<<<<<< HEAD
-polygon = Vector2Array( -9192.43, -556.249, -9184.43, 3530.83, 809.5, 3538.83, 801.5, 3450.83, -9127.57, 3450.83, -9135.57, -514.756, -7175.57, -514.756, -7175.57, 924.785, -7263.57, 1020.78, -7263.57, 1852.78, -6431.57, 2292.78, -6375.57, 2268.78, -7231.57, 1796.78, -7231.57, 1060.78, -7111.57, 940.785, -7111.57, -525.971, -4879.57, -525.971, -4879.57, 314.029, -4487.57, 538.029, -4487.57, 1322.03, -4978.84, 1480.63, -4418.84, 1856.63, -3058.84, 2352.63, -4170.84, 1856.63, -4423.84, -513.723, -1943.84, -513.723, -1927.84, -585.723, -8869.84, -585.723 )
-shape_range = Vector2( 25, 38 )
-=======
 polygon = Vector2Array( -9192.43, -556.249, -9184.43, 3530.83, 809.5, 3538.83, 801.5, 3450.83, -9127.57, 3450.83, -9135.57, -514.756, -7007.28, -533.495, -7003.28, 897.166, -7263.57, 1020.78, -7263.57, 1852.78, -6431.57, 2292.78, -6375.57, 2268.78, -7231.57, 1796.78, -7231.57, 1060.78, -6947.28, 933.166, -6947.28, -541.495, -4879.57, -525.971, -4879.57, 314.029, -4487.57, 538.029, -4487.57, 1322.03, -4978.84, 1480.63, -4418.84, 1856.63, -3058.84, 2352.63, -4170.84, 1856.63, -4423.84, -513.723, -1943.84, -513.723, -1927.84, -585.723, -8869.84, -585.723 )
 shape_range = Vector2( 25, 37 )
->>>>>>> MainScene
 trigger = false
 
 [node name="CollisionPolygon2D 4" type="CollisionPolygon2D" parent="StaticBody2D"]
 
 build_mode = 0
 polygon = Vector2Array( -1910.29, -699.751, -1910.29, -27.7513, -1710.29, -27.7513, -1686.29, -555.751, -102.287, -531.751, -78.2866, -507.751, 1033.71, -507.751, 1025.71, -667.751 )
-<<<<<<< HEAD
-shape_range = Vector2( 39, 41 )
-=======
 shape_range = Vector2( 38, 40 )
->>>>>>> MainScene
 trigger = false
 
 
