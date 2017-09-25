@@ -18,6 +18,8 @@ var target_angle = 0
 func _ready():
 	Skin = get_node("Sprite")
 	set_fixed_process(true)
+	get_node("../StaticBody2D").connect("body_enter",self,"_on_StaticBody2D_body_enter")
+	get_node("../StaticBody2D").connect("body_exit",self,"_on_StaticBody2D_body_exit")
 
 
 func _fixed_process(delta):
@@ -52,6 +54,19 @@ func _fixed_process(delta):
 		motion = Vector2()
 
 	move(motion)
+	if is_colliding():
+		#print("Collision with ",get_collider())
+		var n = get_collision_normal()
+		direction = n.slide( direction )
+		move(direction*speed*delta)
+		
 	if motion != Vector2():
 		target_angle = atan2(motion.x, motion.y) - PI/2
 		Skin.set_rot(target_angle)
+
+#func _on_StaticBody2D_body_enter( body ):
+#		print("Entered Area2D with body ", body)
+	
+#func _on_StaticBody2D_body_exit( body ):
+#		print("Exited Area2D with body ", body)
+	
