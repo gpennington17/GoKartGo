@@ -53,7 +53,10 @@ _update_shape_index = 0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
+<<<<<<< HEAD
 transform/pos = Vector2( -1.52321, 0.799639 )
+=======
+>>>>>>> spaceBar-shooting
 transform/rot = -90.0
 transform/scale = Vector2( 0.97561, 1.93575 )
 enabled = false
