@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://Scripts/PlayerCar.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Porsche 911 Carrera 1998.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/camera.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Porsche 911 Carrera 1998.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -21,6 +22,8 @@ collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 1 )
+max_health = 100
+health = 100
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -42,6 +45,7 @@ drag_margin/left = 0.2
 drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
+script/script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -52,9 +56,6 @@ trigger = false
 _update_shape_index = 0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-
-
-transform/pos = Vector2( -1.52321, 0.799639 )
 
 transform/rot = -90.0
 transform/scale = Vector2( 0.97561, 1.93575 )
@@ -70,6 +71,6 @@ __meta__ = {
 
 transform/rot = -90.0
 transform/scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 

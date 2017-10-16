@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://entities/turret/turret_ball/turret_ball.gd" type="Script" id=1]
+[ext_resource path="res://entities/turret/bullet image/towerDefense_tile272.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 9.05712
+
+[node name="turret_ball" type="KinematicBody2D"]
+
+editor/display_folded = true
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 0.894744, 0, 0.231869 )
+shapes/0/trigger = false
+collision/layers = 2
+collision/mask = 2
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+explode_on_impact = true
+damage = 25
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
+[node name="collision" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0, 0.231869 )
+transform/scale = Vector2( 1, 0.894744 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+
