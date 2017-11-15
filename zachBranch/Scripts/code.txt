@@ -1,0 +1,22 @@
+var BalancedText = preload("res://Sprites/Porsche 911 Carrera 1998.png")
+var SpeedText = preload("res://Sprites/carSpeed.png")
+var TankText = preload("res://Sprites/carTank.png")
+export(String,"Balanced","Speed","Tank") var carType
+
+func _ready():
+
+	if carType == "Speed":
+		Skin.set_texture(SpeedText)
+		MAX_SPEED = 900
+		acceleration = 800
+		decceleration = 1000
+	elif carType == "Balanced":
+		Skin.set_texture(BalancedText)
+		MAX_SPEED = 700
+		acceleration = 500
+		decceleration = 2000
+	elif carType == "Tank":
+		Skin.set_texture(TankText)
+		MAX_SPEED = 550
+		acceleration = 300
+		decceleration = 4000

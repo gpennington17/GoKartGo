@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://Scripts/options.gd" type="Script" id=1]
+[ext_resource path="res://Images/Sprites/option_menu.png" type="Texture" id=2]
+[ext_resource path="res://Images/Sprites/vertical_selector.png" type="Texture" id=3]
+
+[node name="options_menu" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="car_select" type="Sprite" parent="."]
+
+transform/pos = Vector2( 514.505, 298.653 )
+transform/scale = Vector2( 1.19672, 1.23779 )
+texture = ExtResource( 2 )
+
+[node name="selection_arrow" type="Sprite" parent="."]
+
+transform/pos = Vector2( 190, 564 )
+texture = ExtResource( 3 )
+
+

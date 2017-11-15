@@ -1,0 +1,194 @@
+[gd_scene load_steps=14 format=1]
+
+[ext_resource path="res://Scenes/Track.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Images/Sprites/spr_missile.png" type="Texture" id=3]
+[ext_resource path="res://Images/Fonts/m5x7.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Images/Sprites/health_bar_large.png" type="Texture" id=5]
+[ext_resource path="res://Images/Sprites/health_power.png" type="Texture" id=6]
+[ext_resource path="res://Images/Sprites/speed.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/enemy_rocket_launcher.tscn" type="PackedScene" id=8]
+
+[sub_resource type="GDScript" id=1]
+
+resource/name = "num_missiles"
+script/source = "#num_missiles (built-in) 
+
+extends TextureFrame
+
+var number_missiles = 0 setget set_num_missiles 
+
+func _ready():
+	pass
+	
+func set_num_missiles(new_value):
+	number_missiles = new_value 
+	get_node(\"label\").set_text(str(number_missiles))
+"
+
+[sub_resource type="DynamicFont" id=2]
+
+font/size = 100
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 4 )
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "#sprite_health(built-in) 
+
+extends Sprite
+
+
+
+func _ready():
+	utils.attach(\"Player\", \"health_changed\", self, \"_on_health_changed\") 
+	pass
+	
+func _on_health_changed(health):
+	set_frame(health) 
+"
+
+[sub_resource type="GDScript" id=4]
+
+resource/name = "num_speed"
+script/source = "#num_speed(built_in) 
+
+extends TextureFrame
+
+var number_turbo = 0 setget set_num_turbo 
+
+func _ready():
+	pass
+	
+func set_num_turbo(new_value):
+	number_turbo = new_value 
+	get_node(\"label\").set_text(str(number_turbo))
+"
+
+[sub_resource type="DynamicFont" id=5]
+
+font/size = 100
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 4 )
+
+[node name="Main" type="Node2D"]
+
+transform/pos = Vector2( -569.083, -1013.01 )
+
+[node name="Track" parent="." instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 3538.65, -273.2 )
+transform/scale = Vector2( 2, 2 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 6254.29, 17953.4 )
+transform/rot = 540.337
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+editor/display_folded = true
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="missile_icon" type="TextureFrame" parent="HUD"]
+
+rect/rotation = 90.0
+rect/scale = Vector2( 0.2, 0.2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 40.0
+margin/top = 60.0
+margin/right = 168.0
+margin/bottom = 124.0
+texture = ExtResource( 3 )
+stretch_mode = 0
+script/script = SubResource( 1 )
+
+[node name="label" type="Label" parent="HUD/missile_icon"]
+
+rect/rotation = 270.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 100.0
+margin/top = 128.0
+margin/right = 140.0
+margin/bottom = 208.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="health_sprite" type="Sprite" parent="HUD"]
+
+transform/pos = Vector2( 120, 20 )
+transform/scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 5 )
+hframes = 11
+frame = 10
+script/script = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="health_icon" type="Sprite" parent="HUD/health_sprite"]
+
+transform/pos = Vector2( -35, 0 )
+transform/scale = Vector2( 0.06, 0.06 )
+texture = ExtResource( 6 )
+
+[node name="turbo_icon" type="TextureFrame" parent="HUD"]
+
+rect/scale = Vector2( 0.2, 0.2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 120.0
+margin/top = 35.0
+margin/right = 211.0
+margin/bottom = 163.0
+texture = ExtResource( 7 )
+stretch_mode = 0
+script/script = SubResource( 4 )
+
+[node name="label" type="Label" parent="HUD/turbo_icon"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 137.0
+margin/top = 22.0
+margin/right = 177.0
+margin/bottom = 102.0
+custom_fonts/font = SubResource( 5 )
+text = "0"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="enemy_rocket_launcher" parent="." instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 20068.5, 18424.5 )
+
+[node name="enemy_rocket_launcher2" parent="." instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 35326.8, 11315.9 )
+
+[node name="enemy_rocket_launcher1" parent="." instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 8943.11, 6485.37 )
+
+
