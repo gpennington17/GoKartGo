@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://Images/Landscapes/topdown_tiles/pond2.png" type="Texture" id=1]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -330.213, 1117.16, -675.093, 1079.44, -928.364, 987.827, -1084.64, 853.108, -1257.08, 567.505, -1230.13, 141.794, -1090.03, -256.973, -874.476, -477.911, -642.76, -644.962, -470.321, -698.85, -351.768, -698.85, -211.661, -671.906, -66.1647, -531.799, 127.83, -197.697 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -330.213, 1117.16, 127.83, -197.697, 294.881, 12.4644, 117.052, 1127.93 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 117.052, 1127.93, 294.881, 12.4644, 440.377, 152.572, 531.986, 1100.99 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 531.986, 1100.99, 440.377, 152.572, 769.091, 427.398, 828.367, 1057.88 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 1264.85, 874.663, 1184.02, 939.328, 1000.81, 1014.77, 828.367, 1057.88, 769.091, 427.398, 1016.97, 519.006, 1167.86, 610.615, 1270.24, 707.612, 1291.8, 788.444 )
+
+[node name="pond2" type="Area2D"]
+
+transform/scale = Vector2( 1.6, 1.6 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 3 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 4 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 5 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+build_mode = 0
+polygon = Vector2Array( -470.321, -698.85, -351.768, -698.85, -211.661, -671.906, -66.1647, -531.799, 127.83, -197.697, 294.881, 12.4644, 440.377, 152.572, 769.091, 427.398, 1016.97, 519.006, 1167.86, 610.615, 1270.24, 707.612, 1291.8, 788.444, 1264.85, 874.663, 1184.02, 939.328, 1000.81, 1014.77, 828.367, 1057.88, 531.986, 1100.99, 117.052, 1127.93, -330.213, 1117.16, -675.093, 1079.44, -928.364, 987.827, -1084.64, 853.108, -1257.08, 567.505, -1230.13, 141.794, -1090.03, -256.973, -874.476, -477.911, -642.76, -644.962 )
+shape_range = Vector2( 0, 4 )
+trigger = false
+
+

@@ -1,0 +1,300 @@
+[gd_scene load_steps=13 format=1]
+
+[ext_resource path="res://Images/Sprites/spr_missile.png" type="Texture" id=1]
+[ext_resource path="res://Images/Fonts/m5x7.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Images/Sprites/health_bar_large.png" type="Texture" id=3]
+[ext_resource path="res://Images/Sprites/health_power.png" type="Texture" id=4]
+[ext_resource path="res://Images/Sprites/speed.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "#num_missiles (built-in) 
+
+extends TextureFrame
+
+var number_missiles = 0 setget set_num_missiles 
+
+func _ready():
+	pass
+	
+func set_num_missiles(new_value):
+	number_missiles = new_value 
+	get_node(\"label\").set_text(str(number_missiles))
+
+
+"
+
+[sub_resource type="DynamicFont" id=2]
+
+font/size = 100
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 2 )
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "#sprite_health(built-in) 
+
+extends Sprite
+
+func _ready():
+	utils.attach(\"Player\", \"health_changed\", self, \"_on_health_changed\") 
+	pass
+	
+func _on_health_changed(health):
+	set_frame(health) 
+
+"
+
+[sub_resource type="GDScript" id=4]
+
+script/source = "#num_speed(built_in) 
+
+extends TextureFrame
+
+var number_turbo = 0 setget set_num_turbo 
+
+func _ready():
+	pass
+	
+func set_num_turbo(new_value):
+	number_turbo = new_value 
+	get_node(\"label\").set_text(str(number_turbo))
+"
+
+[sub_resource type="GDScript" id=5]
+
+script/source = "extends Label
+
+const seconds_in_min = 60 
+ 
+
+
+func _ready():
+	yield(utils.create_timer(4.0), \"timeout\") 
+	start_timer() 
+
+
+func start_timer():
+	while true : 
+		var str_elapsed = \"%02d : %02d\" % [global.minutes_left, global.seconds_left]
+		utils.find_node(\"time_left\").set_text(str(str_elapsed))
+		yield(utils.create_timer(1.0), \"timeout\") 
+		if global.seconds_left == 0 :
+			if global.minutes_left >= 1:
+				global.minutes_left -= 1
+				global.seconds_left = 59
+			else:
+				print(\"time is up, game over\") 
+		
+		elif global.seconds_left > 59 :
+				global.minutes_left += 1 
+				global.seconds_left = global.seconds_left - 60 
+		else :
+			global.seconds_left -= 1 
+	"
+
+[sub_resource type="GDScript" id=6]
+
+script/source = "#checkpoint (built-in) 
+# flashes the checkpoint label on the screen when you hit a checkpoint  
+
+extends Label
+
+
+func _ready():
+	pass
+	
+func flash_checkpoint():
+	for i in range(5):
+		show()
+		yield(utils.create_timer(0.2), \"timeout\") 
+		hide()
+		yield(utils.create_timer(0.2), \"timeout\") 
+
+
+	"
+
+[sub_resource type="GDScript" id=7]
+
+script/source = "extends Label
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	countdown()
+
+func countdown():
+	yield(utils.create_timer(1.0), \"timeout\")
+	show()
+	yield(utils.create_timer(1.0), \"timeout\")
+	set_text(\"2\")
+	yield(utils.create_timer(1.0), \"timeout\")
+	set_text(\"1\") 
+	yield(utils.create_timer(1.0), \"timeout\")
+	set(\"custom_colors/font_color\",Color(10,243,40,255))   
+	set_text(\"GO!\")
+	yield(utils.create_timer(1.0), \"timeout\") 
+	hide() "
+
+[node name="HUD" type="CanvasLayer"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="missile_icon" type="TextureFrame" parent="."]
+
+rect/scale = Vector2( 0.2, 0.2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 30.0
+margin/top = 60.0
+margin/right = 158.0
+margin/bottom = 124.0
+texture = ExtResource( 1 )
+stretch_mode = 0
+script/script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="missile_icon"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 150.0
+margin/top = -20.0
+margin/right = 190.0
+margin/bottom = 60.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="health_sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 120, 20 )
+transform/scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 3 )
+hframes = 11
+frame = 10
+script/script = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="health_sprite"]
+
+transform/pos = Vector2( -35, 0 )
+transform/scale = Vector2( 0.06, 0.06 )
+texture = ExtResource( 4 )
+
+[node name="turbo_icon" type="TextureFrame" parent="."]
+
+rect/scale = Vector2( 0.2, 0.2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 150.0
+margin/top = 50.0
+margin/right = 241.0
+margin/bottom = 178.0
+texture = ExtResource( 5 )
+stretch_mode = 0
+script/script = SubResource( 4 )
+
+[node name="Label" type="Label" parent="turbo_icon"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 150.0
+margin/top = 25.0
+margin/right = 190.0
+margin/bottom = 105.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="lap_number" type="Label" parent="."]
+
+rect/scale = Vector2( 0.5, 0.5 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 868.0
+margin/top = 2.0
+margin/right = 1114.0
+margin/bottom = 82.0
+custom_fonts/font = SubResource( 2 )
+text = "Lap 1/3"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="time_left" type="Label" parent="."]
+
+rect/scale = Vector2( 0.5, 0.5 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 872.0
+margin/top = 43.0
+margin/right = 1099.0
+margin/bottom = 123.0
+custom_fonts/font = SubResource( 2 )
+text = "01 : 00"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = SubResource( 5 )
+
+[node name="checkpoint_label" type="Label" parent="."]
+
+visibility/visible = false
+rect/scale = Vector2( 0.7, 0.7 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 384.0
+margin/top = 88.0
+margin/right = 737.0
+margin/bottom = 168.0
+custom_fonts/font = SubResource( 2 )
+text = "Checkpoint!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = SubResource( 6 )
+
+[node name="countdown" type="Label" parent="."]
+
+visibility/visible = false
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 490.0
+margin/top = 120.0
+margin/right = 552.0
+margin/bottom = 200.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.769531, 0.0901794, 0.0901794, 1 )
+text = "3"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = SubResource( 7 )
+
+

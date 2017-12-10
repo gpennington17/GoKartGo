@@ -1,0 +1,26 @@
+[gd_scene format=1]
+
+[node name="game_over" type="CanvasLayer"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="Label" type="Label" parent="."]
+
+rect/scale = Vector2( 5, 5 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 309.0
+margin/top = 189.0
+margin/right = 389.0
+margin/bottom = 203.0
+text = "GAME OVER!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+

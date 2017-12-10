@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://Scenes/moving_enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Images/Sprites/ufoGreen.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/curve_path.tscn" type="PackedScene" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "#flying_ship built in 
+
+extends Area2D
+
+var bullet = preload(\"res://Scenes/enemy_ship_bullet.tscn\") 
+onready var path = get_node(\"curve_path\") 
+
+onready var bullet_container = get_node(\"bullet_container\") 
+onready var shoot_timer = get_node(\"shoot_timer\") 
+
+
+var follow
+var remote
+var speed = 800
+var target = null 
+var childpath 
+
+func _ready():
+	yield(utils.create_timer(4.0), \"timeout\")
+	set_process(true) 
+	childpath = path.get_child(0) 
+	follow = PathFollow2D.new() 
+	childpath.add_child(follow) 
+	remote = Node2D.new()  # set enemy to this value   
+	follow.add_child(remote) 
+	
+	shoot_timer.set_wait_time(2.0)
+	shoot_timer.start() 
+	
+func shoot_1():
+	var dir = get_global_pos() - target.get_global_pos()
+	var b = bullet.instance() 
+	bullet_container.add_child(b)
+	b.start_at(dir.angle(), get_global_pos()) 
+	
+func _on_shoot_timer_timeout():
+	shoot_1() 
+	
+func _process(delta):
+	follow.set_offset(follow.get_offset() + speed * delta)
+	set_pos(remote.get_global_pos())
+	"
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 129.229
+
+[sub_resource type="Animation" id=3]
+
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:transform/rot")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="flying_ship" instance=ExtResource( 1 )]
+
+script/script = SubResource( 1 )
+
+[node name="Sprite" parent="."]
+
+transform/pos = Vector2( 0, -8.40948 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="."]
+
+shape = SubResource( 2 )
+_update_shape_index = 0
+
+[node name="AnimationPlayer" parent="."]
+
+anims/rotation = SubResource( 3 )
+playback/speed = 0.3
+
+[node name="bullet_container" type="Node" parent="."]
+
+[node name="shoot_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="curve_path" parent="." instance=ExtResource( 3 )]
+
+[connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
+
+
+[editable path="curve_path"]

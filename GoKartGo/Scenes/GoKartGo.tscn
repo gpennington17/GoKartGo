@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://Scripts/main.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/fullTrack.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/flying_ship.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/enemy_rocket_launcher.tscn" type="PackedScene" id=6]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "#HUD built-in script 
+
+
+extends CanvasLayer
+
+var checkpoint_label = null 
+
+func _ready():
+	pass
+
+
+func _on_checkpoint_body_enter( body ):
+	checkpoint_label = get_node(\"checkpoint_label\")
+	checkpoint_label.flash_checkpoint()
+	global.seconds_left += 30 
+
+
+func _on_checkpoint_2_body_enter( body ):
+	checkpoint_label = get_node(\"checkpoint_label\")
+	checkpoint_label.flash_checkpoint()
+	global.seconds_left += 30 
+
+
+func _on_finish_line_body_enter( body ):
+	if global.current_lap == 3: 
+		print(\"Game over, you win\") 
+	else:
+		global.current_lap += 1 
+		get_node(\"lap_number\").set_text(\"Lap \" + str(global.current_lap) + \"/\" + str(global.num_laps))
+		var finish_line = get_node(\"checkpoint_label\")
+		finish_line.flash_checkpoint()
+		global.seconds_left += 30 
+"
+
+[node name="GoKartGo" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="HUD" parent="." instance=ExtResource( 2 )]
+
+editor/display_folded = true
+script/script = SubResource( 1 )
+
+[node name="full_track" parent="." instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/scale = Vector2( 2, 2 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1047.45, 6298.94 )
+transform/rot = 270.0
+
+[node name="enemy_ship_one" parent="." instance=ExtResource( 5 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 6593.07, -6213.79 )
+
+[node name="path" parent="enemy_ship_one/curve_path"]
+
+transform/pos = Vector2( 6264.01, -6308.63 )
+
+[node name="enemy_rocket_launcher" parent="." instance=ExtResource( 6 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 2371.04, -615.539 )
+transform/scale = Vector2( 3, 3 )
+
+[connection signal="body_enter" from="full_track/checkpoint" to="HUD" method="_on_checkpoint_body_enter"]
+
+[connection signal="body_enter" from="full_track/checkpoint 2" to="HUD" method="_on_checkpoint_2_body_enter"]
+
+[connection signal="body_enter" from="full_track/finish_line" to="HUD" method="_on_finish_line_body_enter"]
+
+[connection signal="body_enter" from="full_track/pond" to="Player" method="_on_pond_body_enter"]
+
+[connection signal="body_enter" from="full_track/pond2" to="Player" method="_on_pond2_body_enter"]
+
+[connection signal="body_enter" from="full_track/pond3" to="Player" method="_on_pond3_body_enter"]
+
+
+[editable path="HUD"]
+[editable path="full_track"]
+[editable path="full_track/pond"]
+[editable path="enemy_ship_one"]
+[editable path="enemy_ship_one/curve_path"]
+[editable path="enemy_rocket_launcher"]
