@@ -17,7 +17,13 @@ extends CanvasLayer
 var checkpoint_label = null 
 
 func _ready():
-	pass
+	set_process_input(true) 
+	
+func _input(event):
+	if event.is_action_pressed(\"pause_toggle\"):
+		global.paused = not global.paused 
+		get_tree().set_pause(global.paused)
+		get_node(\"pause_popup\").set_hidden(not global.paused) 
 
 
 func _on_checkpoint_body_enter( body ):
@@ -35,6 +41,8 @@ func _on_checkpoint_2_body_enter( body ):
 func _on_finish_line_body_enter( body ):
 	if global.current_lap == 3: 
 		print(\"Game over, you win\") 
+		queue_free()
+		get_tree().change_scene(\"res://scenes/winner.tscn\")
 	else:
 		global.current_lap += 1 
 		get_node(\"lap_number\").set_text(\"Lap \" + str(global.current_lap) + \"/\" + str(global.num_laps))
@@ -49,6 +57,7 @@ script/script = ExtResource( 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 2 )]
 
+process/pause_mode = 2
 editor/display_folded = true
 script/script = SubResource( 1 )
 
@@ -59,12 +68,11 @@ transform/scale = Vector2( 2, 2 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 1047.45, 6298.94 )
+transform/pos = Vector2( 1162.59, 5569.13 )
 transform/rot = 270.0
 
 [node name="enemy_ship_one" parent="." instance=ExtResource( 5 )]
 
-editor/display_folded = true
 transform/pos = Vector2( 6593.07, -6213.79 )
 
 [node name="path" parent="enemy_ship_one/curve_path"]
@@ -83,16 +91,11 @@ transform/scale = Vector2( 3, 3 )
 
 [connection signal="body_enter" from="full_track/finish_line" to="HUD" method="_on_finish_line_body_enter"]
 
-[connection signal="body_enter" from="full_track/pond" to="Player" method="_on_pond_body_enter"]
-
-[connection signal="body_enter" from="full_track/pond2" to="Player" method="_on_pond2_body_enter"]
-
-[connection signal="body_enter" from="full_track/pond3" to="Player" method="_on_pond3_body_enter"]
-
 
 [editable path="HUD"]
 [editable path="full_track"]
 [editable path="full_track/pond"]
+[editable path="Player"]
 [editable path="enemy_ship_one"]
 [editable path="enemy_ship_one/curve_path"]
 [editable path="enemy_rocket_launcher"]

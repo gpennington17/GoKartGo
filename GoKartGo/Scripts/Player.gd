@@ -21,6 +21,18 @@ var target_angle = 0
 
 var speedTexture = preload("res://Images/Sprites/speed_car.png") 
 var tankTexture = preload("res://Images/Sprites/tank.png") 
+export (PackedScene) var player_bullet 
+onready var bullet_container = get_node("bullet_container")
+onready var gun = get_node("player_sprite/gun")  
+onready var bullet_position = get_node("position") 
+onready var gun_timer = get_node("gun_timer") 
+
+var mouse_pos = Vector2()
+var mouse_vector
+
+
+
+
 
 
 func _ready(): 
@@ -34,6 +46,17 @@ func _fixed_process(delta):
 	 
 	direction = Vector2() 
 	
+	gun.set_rot((mouse_pos - get_global_pos()).angle())
+	mouse_pos = get_global_mouse_pos()
+	mouse_vector = mouse_pos - self.get_global_pos()
+	
+	
+	
+	
+	
+	
+	
+	
 	if Input.is_action_pressed("ui_left"):
 		direction.x = -1 
 	elif Input.is_action_pressed("ui_right"):
@@ -42,8 +65,9 @@ func _fixed_process(delta):
 		direction.y = -1
 	elif Input.is_action_pressed("ui_down"):
 		direction.y = 1 
-	#if Input.is_action_pressed("player_shoot"):
-	#shoot() 
+	if Input.is_action_pressed("player_shoot"):
+		if gun_timer.get_time_left() == 0 :
+			shoot() 
 	
 	if direction != Vector2() :
 		speed += acceleration * delta 
@@ -98,6 +122,15 @@ func set_health(new_value):
 	 
 		
 	
+
+func shoot():
+	
+	gun_timer.start() 
+	var b = player_bullet.instance() 
+	bullet_container.add_child(b) 
+	b.start_at(gun.get_rot(), get_pos())
+	
+
 
 func _on_outside_track_body_enter( body ):
 	print("outside the track, slow speed") 

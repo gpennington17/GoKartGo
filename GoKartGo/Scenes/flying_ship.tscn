@@ -16,6 +16,7 @@ onready var path = get_node(\"curve_path\")
 onready var bullet_container = get_node(\"bullet_container\") 
 onready var shoot_timer = get_node(\"shoot_timer\") 
 
+var enemy_health = 4 setget set_enemy_health
 
 var follow
 var remote
@@ -47,6 +48,13 @@ func _on_shoot_timer_timeout():
 func _process(delta):
 	follow.set_offset(follow.get_offset() + speed * delta)
 	set_pos(remote.get_global_pos())
+	
+func _on_Area2D_body_enter(body):
+    if body.is_in_group(\"player\"):
+        print(str('Player has entered'))
+
+func set_enemy_health(new_value):
+	enemy_health = new_value 
 	"
 
 [sub_resource type="CircleShape2D" id=2]
@@ -70,7 +78,9 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[node name="flying_ship" instance=ExtResource( 1 )]
+[node name="flying_ship" groups=[
+"player",
+] instance=ExtResource( 1 )]
 
 script/script = SubResource( 1 )
 

@@ -1,0 +1,160 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://Images/Sprites/menubackground.jpg" type="Texture" id=1]
+[ext_resource path="res://Images/Sprites/gokartgo3.png" type="Texture" id=2]
+[ext_resource path="res://Images/Sprites/checkeredflag.png" type="Texture" id=3]
+[ext_resource path="res://Images/Sprites/start.png" type="Texture" id=4]
+[ext_resource path="res://Images/Sprites/options.png" type="Texture" id=5]
+[ext_resource path="res://Images/Sprites/credits.png" type="Texture" id=6]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "#start menu built in script 
+
+extends CenterContainer
+
+
+
+func _ready():
+	# Called every time the node is added to the scene.
+	# Initialization here
+	pass
+
+
+
+
+
+func _on_start_pressed():
+	queue_free()
+	get_tree().change_scene(\"res://Scenes/GoKartGo.tscn\")
+
+
+func _on_options_pressed():
+	pass # replace with function body
+
+
+func _on_credits_pressed():
+	pass # replace with function body
+"
+
+[node name="HBoxContainer" type="CenterContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+use_top_left = false
+script/script = SubResource( 1 )
+
+[node name="TextureFrame" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1536.0
+margin/bottom = 865.0
+texture = ExtResource( 1 )
+stretch_mode = 0
+
+[node name="container" type="Panel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 768.0
+margin/top = 432.0
+margin/right = 768.0
+margin/bottom = 432.0
+
+[node name="TextureFrame" type="TextureFrame" parent="container"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 8.0
+margin/top = -200.0
+margin/right = 888.0
+margin/bottom = 464.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+
+[node name="TextureFrame 2" type="TextureFrame" parent="container"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 8.0
+margin/top = 0.0
+margin/right = 888.0
+margin/bottom = 664.0
+texture = ExtResource( 3 )
+stretch_mode = 4
+
+[node name="start" type="TextureButton" parent="container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 309.0
+margin/top = 500.0
+margin/right = 1189.0
+margin/bottom = 1164.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+params/resize_mode = 0
+params/stretch_mode = 4
+
+[node name="options" type="TextureButton" parent="container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 251.0
+margin/top = 600.0
+margin/right = 1131.0
+margin/bottom = 1264.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 5 )
+params/resize_mode = 0
+params/stretch_mode = 4
+
+[node name="credits" type="TextureButton" parent="container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 248.0
+margin/top = 693.0
+margin/right = 1128.0
+margin/bottom = 1357.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 6 )
+params/resize_mode = 0
+params/stretch_mode = 4
+
+[connection signal="pressed" from="container/start" to="." method="_on_start_pressed"]
+
+[connection signal="pressed" from="container/options" to="." method="_on_options_pressed"]
+
+[connection signal="pressed" from="container/credits" to="." method="_on_credits_pressed"]
+
+

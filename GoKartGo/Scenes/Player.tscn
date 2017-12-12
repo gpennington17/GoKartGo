@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Images/Sprites/normal_car.png" type="Texture" id=2]
-[ext_resource path="res://Images/Sprites/unloaded_launcher.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/player_bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Images/Sprites/normal_car.png" type="Texture" id=3]
+[ext_resource path="res://Images/Sprites/unloaded_launcher.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -20,30 +21,25 @@ collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 1 )
+player_bullet = ExtResource( 2 )
 
 [node name="player_sprite" type="Sprite" parent="."]
 
-editor/display_folded = true
 transform/rot = 90.0
 transform/scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
-
-[node name="rocket_launcher" type="Sprite" parent="player_sprite"]
-
-transform/pos = Vector2( -8.11965, -0.588156 )
-transform/rot = 180.0
-transform/scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 3 )
 
-[node name="launcher_position" type="Position2D" parent="."]
+[node name="gun" type="Sprite" parent="player_sprite"]
+
+transform/rot = 180.0
+texture = ExtResource( 4 )
 
 [node name="player_camera" type="Camera2D" parent="."]
 
-transform/scale = Vector2( 1.59755, 2.84009 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 7, 7 )
+zoom = Vector2( 5, 5 )
 limit/left = -10000000
 limit/top = -10000000
 limit/right = 10000000
@@ -74,5 +70,18 @@ transform/rot = 90.0
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="bullet_container" type="Node" parent="."]
+
+[node name="position" type="Position2D" parent="."]
+
+transform/pos = Vector2( -19.0262, -1.66332e-06 )
+
+[node name="gun_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
 
 
