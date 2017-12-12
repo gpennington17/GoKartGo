@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://Scripts/turret.gd" type="Script" id=1]
+[ext_resource path="res://shooting/entities/turret/bullet image/towerDefense_tile250.png" type="Texture" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -5.62906, -40.9487, 2.20601, -41.9281, 5.14415, -23.3198, -6.60844, -20.3817 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 11.0204, -17.4435, 19.8349, -13.526, 19.8349, 5.08231, 10.0411, 10.9586, -11.5054, 11.938, -22.2786, 4.10292, -23.258, -11.5672, -15.4229, -17.4435, -6.60844, -20.3817 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 11.0204, -17.4435, -6.60844, -20.3817, 5.14415, -23.3198 )
+
+[node name="turret" type="KinematicBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -0.691635, 12.88 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, -0.691635, 12.88 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 3 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, -0.691635, 12.88 )
+shapes/2/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+bullet_angle = 270
+bullet_speed = 8
+bullet_gravity = 0
+bullet_delay = 0.2
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( -1.70702, -4.17287 )
+texture = ExtResource( 2 )
+
+[node name="collision" type="CollisionPolygon2D" parent="."]
+
+transform/pos = Vector2( -0.691635, 12.88 )
+build_mode = 0
+polygon = Vector2Array( -11.5054, 11.938, -22.2786, 4.10292, -23.258, -11.5672, -15.4229, -17.4435, -6.60844, -20.3817, -5.62906, -40.9487, 2.20601, -41.9281, 5.14415, -23.3198, 11.0204, -17.4435, 19.8349, -13.526, 19.8349, 5.08231, 10.0411, 10.9586 )
+shape_range = Vector2( 0, 2 )
+trigger = false
+
+[node name="bullet_spawn" type="Position2D" parent="collision"]
+
+transform/pos = Vector2( -0.97937, -42.7167 )
+
+
